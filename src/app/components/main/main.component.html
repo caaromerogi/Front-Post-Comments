@@ -1,0 +1,12 @@
+<div>   
+    <h2>ADD A NEW POST</h2>
+    <div>
+        <input type = "text" [(ngModel)] = 'newTitle' placeholder="Title"/><br/>
+        <input type = "text" [(ngModel)] = 'newAuthor' placeholder="Author"/><br/>
+        <button (click) = "submitPost()">Submit</button>
+    <div *ngIf="posts">
+        <div *ngFor="let post of posts">
+            <app-post [post]="post"></app-post>
+        </div>
+    </div>
+</div>

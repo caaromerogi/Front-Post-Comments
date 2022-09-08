@@ -1,0 +1,9 @@
+<h3>Title: {{post?.title}}</h3>
+<p>Author: {{post?.author}}</p>
+<div *ngIf="comments">
+
+    <div *ngFor="let comment of comments">
+        <h4>Comment:</h4>
+        <app-comment [comment] = "comment" ></app-comment>
+    </div>
+</div>
