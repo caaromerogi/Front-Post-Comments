@@ -6,6 +6,7 @@
     justify-content: center;
     padding: 10px;
     overflow-y: auto;
+  
 }
 
 .post{
@@ -13,7 +14,9 @@
     padding: 10px;
 }
 
-
+.return-login-button{
+  background-color: rebeccapurple;
+}
 
 h2{
     font-size: 21px;
@@ -52,6 +55,10 @@ button{
 button:hover,
 button:focus {
   background-color: #829cf0;
+}
+
+button:disabled{
+  background-color: #bfcdfb;
 }
 
 

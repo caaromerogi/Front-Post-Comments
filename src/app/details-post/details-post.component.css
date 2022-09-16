@@ -62,6 +62,10 @@ input:focus{
 }
 
 
+.home-button{
+  background-color: rebeccapurple;
+}
+
 button{
     margin-top: 10px;
     margin-bottom: 10px;
@@ -83,6 +87,11 @@ button{
 button:hover,
 button:focus {
   background-color: #829cf0;
+}
+
+
+button:disabled{
+  background-color: #bfcdfb;
 }
 
 

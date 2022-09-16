@@ -39,7 +39,6 @@ export class MainComponent implements OnInit {
     let validationResult = false;
     this.state.state.subscribe(currentState => {
       this.availableState = currentState;
-      console.log("Desde main comp: "+this.availableState.token)
       if(!currentState.loggedIn){
           this.router.navigateByUrl('/login')
           validationResult = false
@@ -72,7 +71,14 @@ export class MainComponent implements OnInit {
 
   getSocketPostData(){
     this.socketManagerPost = this.socket.toPostView();
-    this.socketManagerPost.subscribe(post => this.posts?.unshift(post))
+    this.socketManagerPost.subscribe({
+      next: ((post) => {
+        this.posts?.unshift(post)
+      }),
+      error: ((err:any) => {
+        console.log('An error occurred with socket connection to gamma, try it later or reload the page')
+      })
+    })
   }
 
   closeSocketPost(){
@@ -81,6 +87,7 @@ export class MainComponent implements OnInit {
 
 
   // getSocketCommentData(){
+    //post => this.posts?.unshift(post)
   //   this.socketManagerComment = this.socket.toComment();
   //   this.socketManagerComment.subscribe(comment => this.comments)
   // }

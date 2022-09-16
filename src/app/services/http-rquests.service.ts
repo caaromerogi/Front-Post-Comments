@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { CommentType, CreatePostCommand, Post } from './models';
+import { ErrorHandlerService } from './error-service/error-handler.service';
+import { catchError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,26 +19,34 @@ export class HttpRquestsService {
   }
 
   getAllPosts(): Observable<Post[]>{
-    return this.client.get<Post[]>('https://beta-post-comments-start.herokuapp.com/get/AllPosts');
+    return this.client.get<Post[]>('https://beta-post-comments.herokuapp.com/get/AllPosts');
   }
 
+
   getPostById(postId:string|null):Observable<Post>{
-    return this.client.get<Post>(`https://beta-post-comments-start.herokuapp.com/get/post/${postId}`)
+    return this.client.get<Post>(`https://beta-post-comments.herokuapp.com/get/post/${postId}`)
   }
 
   createPostAction(command:CreatePostCommand, token:string):Observable<Object>{
-    return this.client.post('http://localhost:8080/create/post', command, {
+    return this.client.post('https://alpha-post-comments.herokuapp.com/create/post', command, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       })})
   }
 
-  createCommentAction(command:CommentType){
-    return this.client.post('http://localhost:8080/add/comment', command, this.httpOptions);
+  createCommentAction(command:CommentType, token:string){
+    return this.client.post('https://alpha-post-comments.herokuapp.com/add/comment', command, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      })});
   }
 
   loginMethod(command:any){
-    return this.client.post<any>('http://localhost:8080/auth/login', command, this.httpOptions);
+    return this.client.post<any>('https://alpha-post-comments.herokuapp.com/auth/login', command, this.httpOptions);
   }
+
+  
 }
+

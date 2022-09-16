@@ -22,21 +22,48 @@ export class LoginComponent implements OnInit {
 
   async loginWithGoogle(){
     const response = await this.authService.logInWithGoogle()
-    if(response){
-      console.log(response)
-      this.requestService.loginMethod({
-        username:response.user.email,
-        password:response.user.email
-      }).subscribe(token =>{
-        console.log("hola soy el token: "+token.access_token)
+
+      if (response) {
         this.state.state.next({
-          loggedIn:true,
-          authenticatedPerson:response,
-          token: token.access_token
+          loggedIn: true,
+          authenticatedPerson: response,
+          token: '',
+        });
+
+        this.router.navigateByUrl('/home')
+
+        this.requestService.loginMethod({
+          username:response.user.email,
+          password:response.user.email
+        }).subscribe({
+          next: ((token)=>{
+            if(token){
+              this.state.state.next({
+                loggedIn: true,
+                authenticatedPerson: response,
+                token: token.access_token,
+              });
+            }
+          }),
+          error: ((err:any)=>{
+            console.log('This user can see the posts and comments but cannot create or comment them')
+          })
         })
-      })
       this.router.navigateByUrl('/home');
+      }
     }
   }
 
-}
+/*
+token =>{
+          if(token){
+            this.state.state.next({
+              loggedIn: true,
+              authenticatedPerson: response,
+              token: token.access_token,
+            });
+          }
+        },error =>{
+          
+        }
+*/

@@ -16,6 +16,7 @@
             <input type = "text" [(ngModel)] = 'newAuthor' placeholder="Author"/><br/>
             <input type = "text" [(ngModel)] = 'newContent' placeholder="Content"/><br/>
         </div>
-        <button (click) ="submitComment()">Submit</button>
+        <button [disabled]="availableState.token===''" (click) ="submitComment()">Submit</button>
+        <button class="home-button" routerLink="/home"><< Go Back</button>
     </div>
 </div>

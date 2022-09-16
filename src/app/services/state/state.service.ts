@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class StateService {
   initialState = {
-    loggedIn:true, //CAMBIAR A FALSE
+    loggedIn:false, //CAMBIAR A FALSE
     authenticatedPerson:{},
     token:{}
   }

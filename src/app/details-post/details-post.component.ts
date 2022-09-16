@@ -21,7 +21,7 @@ export class DetailsPostComponent implements OnInit {
 
   socketManagerComment?:WebSocketSubject<CommentType>;
 
-
+  availableState:any;
   post?:Post;
 
   constructor(private route:ActivatedRoute, private location:Location
@@ -29,10 +29,28 @@ export class DetailsPostComponent implements OnInit {
     private socket:SocketService) { }
 
   ngOnInit(): void {
-    this.getPost()
-    this.getSocketCommentData()
+
+    if(this.validateLogin()){
+      this.getPost()
+      this.getSocketCommentData()
+    }
     
   }
+
+  validateLogin():boolean{
+    let validationResult = false;
+    this.state.state.subscribe(currentState => {
+      this.availableState = currentState;
+      if(!currentState.loggedIn){
+          this.router.navigateByUrl('/login')
+          validationResult = false
+          return
+      }
+      validationResult = true
+    })    
+    return validationResult;
+  }
+
   getPost(){
     this.client.getPostById(this.route.snapshot.paramMap.get('id')).subscribe(
       post => {
@@ -65,7 +83,7 @@ export class DetailsPostComponent implements OnInit {
       content: this.newContent
     }
 
-    this.client.createCommentAction(newCommand).subscribe();
+    this.client.createCommentAction(newCommand, this.availableState.token).subscribe();
 
     this.newAuthor='';
     this.newContent='';
