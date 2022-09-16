@@ -3,6 +3,8 @@ import { CommentType, Post } from 'src/app/services/models';
 import {Input } from '@angular/core';
 import { SocketService } from 'src/app/services/socket.service';
 import { WebSocketSubject } from 'rxjs/webSocket';
+import { HttpRquestsService } from 'src/app/services/http-rquests.service';
+import { Route } from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -11,29 +13,22 @@ import { WebSocketSubject } from 'rxjs/webSocket';
 })
 export class PostComponent implements OnInit {
 
-  @Input() post?:Post
+  @Input() post?:Post;
 
   postId:string|undefined;
+  
+  newAuthor:string = "";
+  newContent:string="";
 
   comments?:CommentType[];
 
   socketManagerComment?:WebSocketSubject<CommentType>;
 
-  constructor(private socket:SocketService) { }
+  constructor(private request:HttpRquestsService, private socket:SocketService) { }
 
   ngOnInit(): void {
-    this.getSocketCommentData();
-  }
-  
-  getSocketCommentData(){
-    this.comments = this.post?.comments;
-    this.postId = this.post?.aggregateId;
-    this.socketManagerComment = this.socket.toComment(this.postId);
-    this.socketManagerComment.subscribe(comment => this.comments?.unshift(comment));
+
   }
 
-  closeCommentSocket(){
-    this.socketManagerComment?.complete();
-  }
 
 }

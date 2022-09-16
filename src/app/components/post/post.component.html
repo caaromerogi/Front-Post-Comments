@@ -1,9 +1,25 @@
-<h3>Title: {{post?.title}}</h3>
-<p>Author: {{post?.author}}</p>
-<div *ngIf="comments">
-
-    <div *ngFor="let comment of comments">
-        <h4>Comment:</h4>
-        <app-comment [comment] = "comment" ></app-comment>
+<div class="container">
+    <div class="sub-container">
+       <h3>Title:{{post?.title}}</h3>
+        <p>Author:{{post?.author}}</p>
     </div>
+
+    <div>
+        <button routerLink="post/{{post?.aggregateId}}">Check</button>
+    </div>
+    
+        
+        <!-- <div>
+            <h4>Add a comment</h4>
+            <input type = "text" [(ngModel)] = 'newAuthor' placeholder="Author"/><br/>
+            <input type = "text" [(ngModel)] = 'newContent' placeholder="Content"/><br/>
+            <button (click) ="submitComment()">Submit</button>
+        </div>
+    </div>
+    <div  *ngIf="comments">
+        <div  class="comment" *ngFor="let comment of comments"> 
+            <h4>Comment:</h4>
+            <app-comment [comment] = "comment" ></app-comment>
+        </div>
+    </div> -->
 </div>

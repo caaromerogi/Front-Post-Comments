@@ -9,10 +9,10 @@ export class SocketService {
 
   constructor() { }
   toPostView():WebSocketSubject<Post>{
-    return webSocket('ws://localhost:8082/retrieve/mainSpace');
+    return webSocket('WSS://gamma-post-comments.herokuapp.com/retrieve/mainSpace');
   }
 
-  toComment(postId:string|undefined):WebSocketSubject<CommentType>{
-    return webSocket(`ws://localhost:8082//retrieve//${postId}`)
+  toComment(postId:string|null):WebSocketSubject<CommentType>{
+    return webSocket(`WSS://gamma-post-comments.herokuapp.com//retrieve//${postId}`)
   }
 }

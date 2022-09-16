@@ -1,0 +1,21 @@
+<div class="container">
+    <div>
+        <h1>Topic: {{post?.title}}</h1>
+        <h4>Author: {{post?.author}}</h4>
+    </div>
+    <div class="subcontainer">
+        <div class="comments" *ngIf="comments">
+            <div class="comment" *ngFor="let comment of comments">
+                <app-comment class="comment-interno" [comment]="comment"></app-comment>
+            </div>
+        </div>
+    </div>
+    <div class="add-comment">
+        <div>
+            <span>Add a comment!</span>
+            <input type = "text" [(ngModel)] = 'newAuthor' placeholder="Author"/><br/>
+            <input type = "text" [(ngModel)] = 'newContent' placeholder="Content"/><br/>
+        </div>
+        <button (click) ="submitComment()">Submit</button>
+    </div>
+</div>

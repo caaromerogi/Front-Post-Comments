@@ -8,10 +8,10 @@
     justify-content: space-between;
 }
 
-app-main{
-    height: 70vh;
+/* app-main{
+    min-height: 70vh;
     display: flex;
     flex-direction: column;
     
-}
+} */
 

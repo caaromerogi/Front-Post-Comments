@@ -6,10 +6,10 @@ export type Post={
 }
 
 export type CommentType ={
-    postId:string,
+    postId?:string,
     commentId:string,
-    author:string,
-    content:string
+    author?:string,
+    content?:string
 }
 
 export type CreatePostCommand={

@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "post-comments-12783"
+  },
+  "targets": {
+    "post-comments-12783": {
+      "hosting": {
+        "post-comments-project": [
+          "post-comments-12783"
+        ]
+      }
+    }
+  }
+}

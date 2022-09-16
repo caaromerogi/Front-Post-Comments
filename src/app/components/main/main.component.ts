@@ -4,6 +4,8 @@ import { SocketService } from 'src/app/services/socket.service';
 import { Post, CreatePostCommand, PostView, CommentView, CommentType } from 'src/app/services/models';
 import { Observable } from 'rxjs';
 import { WebSocketSubject } from 'rxjs/webSocket';
+import { Router } from '@angular/router';
+import { StateService } from 'src/app/services/state/state.service';
 
 @Component({
   selector: 'app-main',
@@ -16,16 +18,36 @@ export class MainComponent implements OnInit {
 
   newTitle:string = "";
   newAuthor:string = "";
+
+  availableState:any;
   
   socketManagerPost?:WebSocketSubject<Post>;
 
   
-  constructor(private request:HttpRquestsService, private socket:SocketService) { }
+  constructor(private request:HttpRquestsService, private socket:SocketService,
+    private router:Router, private state:StateService) { }
 
   ngOnInit(): void {
-      this.getAllPosts();
-      this.getSocketPostData();
+      if(this.validateLogin()){
+        this.getAllPosts();
+        this.getSocketPostData();
+      }
       
+  }
+
+  validateLogin():boolean{
+    let validationResult = false;
+    this.state.state.subscribe(currentState => {
+      this.availableState = currentState;
+      console.log("Desde main comp: "+this.availableState.token)
+      if(!currentState.loggedIn){
+          this.router.navigateByUrl('/login')
+          validationResult = false
+          return
+      }
+      validationResult = true
+    })    
+    return validationResult;
   }
 
   getAllPosts(){
@@ -40,8 +62,8 @@ export class MainComponent implements OnInit {
         title: this.newTitle,
         author:this.newAuthor
       }
-
-      this.request.createPostAction(newCommand).subscribe();
+  
+      this.request.createPostAction(newCommand, this.availableState.token).subscribe();
 
       this.newTitle='';
       this.newAuthor='';

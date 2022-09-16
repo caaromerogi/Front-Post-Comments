@@ -1,22 +1,49 @@
-.posts{
-    margin-top: 20px;
-    height: 300px;
+.container{
+    text-align: center;
+    height: 78vh;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.subcontainer{
+    background-color: aliceblue;
+    height: 50vh;
+    width: 50vw;
+    border-style: solid;
+    border-radius: 9px;
+    margin-bottom: 5px;
+    overflow: auto;
+    
+    }
+
+.add-comment{
+    width: 50vw;
+    background-color: aliceblue;
+    border-style: solid;
+    border-radius: 9px;
+   
+}
+.comments{
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    padding: 10px;
-    overflow-y: auto;
-}
-
-.post{
+    align-items: center;
+    text-align: center;
     margin: 5px;
-    padding: 10px;
 }
 
+.comment{
+    background-color: #4c4fea;
+    width: 48vw;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
 
-
-h2{
-    font-size: 21px;
+.comment-interno{
 }
 
 input{
@@ -24,8 +51,11 @@ input{
     border-top: none;
     border-right: none;
     border-left: none;
-    background-color: rgb(235, 236, 255);
+    background-color: aliceblue;
+    width: 49vw;
+    
 }
+
 
 input:focus{
     outline: none;
@@ -34,6 +64,7 @@ input:focus{
 
 button{
     margin-top: 10px;
+    margin-bottom: 10px;
     background-color: #4c4fea;
     border-radius: 8px;
     border-style: none;
@@ -61,12 +92,12 @@ button:focus {
   }
 
   *::-webkit-scrollbar {
-    width: 16px;
+    width: 10px;
     height: 7px;
   }
 
   *::-webkit-scrollbar-track {
-    background: #f6f1ff;
+    background: #e9ddff;
   }
 
   *::-webkit-scrollbar-thumb {

@@ -2,6 +2,7 @@
 @import 'normalize.css';
 body {
     min-height: 100vh;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     display: flex;
     flex-direction: column;
     margin: 0%;
@@ -14,6 +15,15 @@ app-root{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
 }
+
+app-main{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 75vh;
+
+} 
 
 
